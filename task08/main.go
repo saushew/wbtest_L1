@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func changeBit(num int64, position int) int64 {
-	a := int64(math.Pow(2, float64(position)))
+	a := int64(1) << position
 	return num ^ a
 }
 
@@ -15,7 +14,7 @@ func main() {
 	var position int
 
 	num = 1
-	position = 64
+	position = 1
 
 	fmt.Println(changeBit(num, position))
 }
