@@ -9,11 +9,7 @@ func main() {
 
 	for _, t := range tempretures {
 		g := int(t/10)*10
-		if _, ok := tempGroups[g]; ok {
-			tempGroups[g] = append(tempGroups[g], t)
-		} else {
-			tempGroups[g] = []float64{t}
-		}
+		tempGroups[g] = append(tempGroups[g], t)
 	}
 
 	fmt.Println(tempGroups)
