@@ -7,32 +7,30 @@ import (
 	"time"
 )
 
-func createHugeString(v *string, n int) {
+var justString string
+
+func createHugeString(n int) string {
 	b := strings.Builder{}
 	b.Grow(n)
 
 	rand.Seed(time.Now().Unix())
 
 	for i := 0; i < n; i++ {
-		r := string(rand.Intn(31) + 1072)
-		b.WriteString(r)
+		r := byte(rand.Intn(26) + 'a')
+		b.WriteByte(r)
 	}
 
-	*v = b.String()
+	return b.String()
 }
 
-func someFunc(justString *string) {
-	var v string
-
-	createHugeString(&v, 1<<10)
-
-	*justString = string([]rune(v)[:100])
+func someFunc() {
+	v := createHugeString(1 << 10)
+	// justString = v[:100]
+	justString = strings.Clone(v[:100])
 }
 
 func main() {
-	var justString string
-
-	someFunc(&justString)
+	someFunc()
 
 	fmt.Println(justString)
 }
