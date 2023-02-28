@@ -2,12 +2,16 @@ package main
 
 import (
 	"fmt"
+	"unicode"
 )
 
-func isUniq(s string) bool {
+func isUnique(s string) bool {
 	m := make(map[rune]struct{}, len(s))
 
 	for _, v := range s {
+		if !unicode.IsLower(v) {
+			v = unicode.ToLower(v)
+		}
 		if _, ok := m[v]; ok {
 			return false
 		}
@@ -18,12 +22,12 @@ func isUniq(s string) bool {
 }
 
 func main() {
-	var s string = "abcd"
-	fmt.Println(isUniq(s))
+	var s string = "abcCd"
+	fmt.Println(isUnique(s))
 
 	s = "abCdefAaf"
-	fmt.Println(isUniq(s))
+	fmt.Println(isUnique(s))
 
 	s = "aabcd"
-	fmt.Println(isUniq(s))
+	fmt.Println(isUnique(s))
 }
